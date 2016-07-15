@@ -3,7 +3,7 @@ import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import WebSocket
-import Messages exposing (message)
+import Messages exposing (..)
 import Json.Decode exposing (..)
 
 
@@ -23,7 +23,7 @@ main =
 
 type alias Model =
   { input : String
-  , messages: List String
+  , messages: List Message
   }
 
 init : (Model, Cmd Msg)
@@ -48,7 +48,7 @@ update msg {input, messages} =
     NewMessage str ->
       case decodeString message str of
         Ok newMsg ->
-          (Model input (newMsg.message :: messages), Cmd.none)
+          (Model input (messages ++ [newMsg]), Cmd.none)
         _ ->
           (Model input messages, Cmd.none)
 
@@ -70,6 +70,6 @@ view model =
     , button [onClick Send] [text "Send"]
     ]
 
-viewMessage : String -> Html msg
+viewMessage : Message -> Html msg
 viewMessage msg =
-  div [] [ text msg ]
+  div [] [ text msg.message ]
