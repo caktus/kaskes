@@ -12,7 +12,13 @@ import Data.Text (Text)
 
 chatSocket :: WebSocketsT Handler ()
 chatSocket = do
-  sendTextData ("Hello, you!" :: Text)
+  writeChan <- channel <$> getYesod
+  readChan <- atomically $ dupTChan writeChan
+  race_
+    (forever $ atomically (readTChan readChan) >>= sendTextData)
+    (sourceWS $$ mapM_C (\msg ->
+      atomically $ writeTChan writeChan msg))
+
 
 getChatSocketR :: Handler Html
 getChatSocketR = do
