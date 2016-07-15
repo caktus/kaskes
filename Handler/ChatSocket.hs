@@ -25,15 +25,19 @@ instance ToJSON SendMessage where
     , "msgType" .= msgType
     ]
 
+serverMessage :: Text -> SendMessage
+serverMessage x = SendMessage {
+    name = "server"
+  , message = x
+  , msgType = "SERVER_MESSAGE"
+  }
+
 chatSocket :: WebSocketsT Handler ()
 chatSocket = do
-  sendTextData ("Welcome to Kaskes. Please enter your name." :: Text)
+  sendTextData $ encode $ serverMessage $
+    ("Welcome to kaskes. Please enter your name." :: Text)
   name <- receiveData
-  sendTextData $ encode $ SendMessage {
-      name = "server"
-    , message = name <> " has joined"
-    , msgType = "SERVER_MESSAGE"
-    }
+  sendTextData $ encode $ serverMessage $ name <> " has joined"
 
   writeChan <- channel <$> getYesod
   readChan <- atomically $ dupTChan writeChan
