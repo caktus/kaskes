@@ -10,6 +10,7 @@ body {
 body * {
   font-family: monospace;
   color: white;
+  font-size: 16px;
 }
 
 .chat-box {
