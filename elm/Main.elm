@@ -3,6 +3,8 @@ import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import WebSocket
+import Messages exposing (message)
+import Json.Decode exposing (..)
 
 
 endpoint = "ws://localhost:3000/chat"
@@ -44,7 +46,11 @@ update msg {input, messages} =
     Send ->
       (Model "" messages, WebSocket.send endpoint input)
     NewMessage str ->
-      (Model input (str :: messages), Cmd.none)
+      case decodeString message str of
+        Ok newMsg ->
+          (Model input (newMsg.message :: messages), Cmd.none)
+        _ ->
+          (Model input messages, Cmd.none)
 
 
 -- Subscriptions
