@@ -9,6 +9,7 @@ import Import
 import Yesod.Core
 import Yesod.WebSockets
 import Data.Text (Text)
+import Text.Hamlet (hamletFile)
 import Data.Aeson
 
 data SendMessage = SendMessage
@@ -53,4 +54,4 @@ chatSocket = do
 getChatSocketR :: Handler Html
 getChatSocketR = do
   webSockets chatSocket
-  defaultLayout ""
+  withUrlRenderer $(hamletFile "templates/chat.hamlet")

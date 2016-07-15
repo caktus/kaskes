@@ -1,0 +1,25 @@
+{
+  "name": "kaskes",
+  "version": "0.0.0",
+  "description": "An experimental chat app with Haskell and Elm",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caktus/kaskes.git"
+  },
+  "author": "nmashton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caktus/kaskes/issues"
+  },
+  "homepage": "https://github.com/caktus/kaskes#readme",
+  "devDependencies": {
+    "elm": "^0.17.1"
+  }
+}
