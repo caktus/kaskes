@@ -74,7 +74,7 @@ viewMessage : Message -> Html msg
 viewMessage msg =
   case msg.msgType of
     "SERVER_MESSAGE" ->
-      div [ class "message server-message" ] [ text msg.message ]
+      div [ class "message server-message" ] [ text ("* " ++ msg.message) ]
     "NEW_MESSAGE" ->
       div [ class "message" ]
         [ span [ class "username" ] [ text msg.name ]
