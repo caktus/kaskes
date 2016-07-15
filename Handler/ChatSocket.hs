@@ -46,6 +46,7 @@ chatSocket = do
       , message = msg
       , msgType = "NEW_MESSAGE"
       }))
+      
   where
     toMsg = toStrict . decodeUtf8 . encode
     serverMessage x = SendMessage {

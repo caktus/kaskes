@@ -21,9 +21,9 @@ body * {
 }
 
 .messages {
-  height: 320px;
+  min-height: 320px;
   border-bottom: 1px dashed white;
-  overflow: scroll;
+  padding: 0 0 1rem 0;
 }
 
 .inputs {
