@@ -1,0 +1,64 @@
+body {
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+body * {
+  font-family: monospace;
+  color: white;
+}
+
+.chat-box {
+  line-height: 1.5;
+  border: 1px solid white;
+  padding: 1rem 1rem 0 1rem;
+  margin: 0 auto;
+  flex: 0 1 640px;
+}
+
+.messages {
+  height: 320px;
+  border-bottom: 1px dashed white;
+  overflow: scroll;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.inputs > * {
+  flex: 0 1 auto;
+}
+
+.inputs > input {
+  flex: 1 1 auto;
+  background-color: black;
+  border: none;
+  padding: 1rem 0;
+}
+
+.inputs > input:focus {
+  outline: none;
+}
+
+.message.server-message {
+  color: limegreen;
+}
+
+.message .username::before {
+  content: "<";
+}
+
+.message .username::after {
+  content: "> ";
+}
+
+.message.error {
+  color: red;
+}

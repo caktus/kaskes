@@ -64,12 +64,21 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ div [] (List.map viewMessage model.messages)
-    , input [onInput Input] []
-    , button [onClick Send] [text "Send"]
+  div [ class "chat-box" ]
+    [ div [ class "messages" ] (List.map viewMessage model.messages)
+    , Html.form [ class "inputs", onSubmit Send ]
+                [ input [onInput Input] [] ]
     ]
 
 viewMessage : Message -> Html msg
 viewMessage msg =
-  div [] [ text msg.message ]
+  case msg.msgType of
+    "SERVER_MESSAGE" ->
+      div [ class "message server-message" ] [ text msg.message ]
+    "NEW_MESSAGE" ->
+      div [ class "message" ]
+        [ span [ class "username" ] [ text msg.name ]
+        , span [ class "text" ] [ text msg.message ]
+        ]
+    _ ->
+      div [ class "message error" ] [ text ("Bad data received of type: " ++ msg.msgType) ]

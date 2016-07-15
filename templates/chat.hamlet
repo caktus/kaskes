@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="static/js/bundle.js">
+    <link href="static/css/app.css" rel="stylesheet">
     <title>kaskes
   <body>
   <script>
