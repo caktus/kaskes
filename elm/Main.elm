@@ -66,8 +66,16 @@ view : Model -> Html Msg
 view model =
   div [ class "chat-box" ]
     [ div [ class "messages" ] (List.map viewMessage model.messages)
-    , Html.form [ class "inputs", onSubmit Send ]
-                [ input [onInput Input] [] ]
+    , Html.form
+      [ class "inputs", onSubmit Send ]
+      [ input
+        [ onInput Input
+        , placeholder "Enter message"
+        , autofocus True
+        , Html.Attributes.value model.input
+        ]
+        []
+      ]
     ]
 
 viewMessage : Message -> Html msg
